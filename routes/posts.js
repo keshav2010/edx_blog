@@ -17,23 +17,25 @@ module.exports =
       const id = req.params.postId;
       if(id < 0 || id > store.posts.length){
         console.log("invalid id");
-        res.send({ error:'invalid id' });
+        res.status(400).send({ error:'invalid id' });
+        return;
       }
-      const newPost = req.body;
-      const newId = store.posts.length;
+      var newPost = req.body;
       if(newPost.name.trim().length == 0 || newPost.url.trim().length == 0){
-        res.send({error : 'invalid name or url'});
+        res.status(400).send({error : 'invalid name or url'});
+        return;
       }
-      store.posts[newId] = newPost;
+      store.posts[id] = newPost;
       res.status(200).send(store.posts);
     },
     removePost : function(req, res, store){
       const id = req.params.postId;
       if(id < 0 || id > store.posts.length){
         console.log("invalid id");
-        res.send({error:'invalid id'});
+        res.status(400).send({error:'invalid id'});
+        return;
       }
-      store.posts.splice(id,0);
+      store.posts.splice(id,1);
       console.log('deleted post');
       res.status(200).send(store.posts);
     }
