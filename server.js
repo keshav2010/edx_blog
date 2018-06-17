@@ -6,7 +6,7 @@ const morgan = require('morgan');
 var app = express();
 //middlewares
 app.use(bodyParser.json());
-app.use(morgan("default"));
+app.use(morgan("tiny"));
 //In memory storage
 var store =
 {
